@@ -6,8 +6,14 @@ function List() {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        axios.get(`${API_URL}/users`)
-            .then(result => setUsers(result.data));
+        const interval = setInterval(() => {
+            axios.get(`${API_URL}/users`)
+                .then(result => setUsers(result.data));
+        }, 2000);
+
+        return () => {
+            clearInterval(interval);
+        }
     }, []);
 
     return (
