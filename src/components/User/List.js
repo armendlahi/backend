@@ -28,6 +28,7 @@ function List() {
                             <th>Date of Birth</th>
                             <th>Country</th>
                             <th>Edit</th>
+                            <th>Delete</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,6 +40,9 @@ function List() {
                                 <td>{user.country}</td>
                                 <td>
                                     <button className="btn btn-outline-warning">Edit User</button>
+                                </td>
+                                <td>
+                                    <button className="btn btn-outline-danger">Delete User</button>
                                 </td>
                             </tr>
                         ))}
