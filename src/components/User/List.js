@@ -16,6 +16,12 @@ function List({ setView }) {
     };
 
     const handleDelete = (id) => {
+        const confirm = window.confirm('Are you sure you want to delete this user?');
+
+        if (!confirm) {
+            return;
+        }
+
         axios
             .delete(`${API_URL}/users/${id}`)
             .then(result => {
@@ -58,7 +64,7 @@ function List({ setView }) {
                             </tr>
                         )) : (
                             <tr>
-                                <td colspan="6" className="text-center">There are no registered users.</td>
+                                <td colSpan="6">There are no registered users.</td>
                             </tr>
                         )}
                     </tbody>
