@@ -68,7 +68,7 @@ function List({ setView, setCurrentUser }) {
                             </tr>
                         )) : (
                             <tr>
-                                <td colSpan="6">There are no registered users.</td>
+                                <td colSpan="6" className="text-center">There are no registered users.</td>
                             </tr>
                         )}
                     </tbody>
