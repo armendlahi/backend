@@ -18,7 +18,12 @@ function List({ setView }) {
     const handleDelete = (id) => {
         axios
             .delete(`${API_URL}/users/${id}`)
-            .then(result => alert(result.data.success))
+            .then(result => {
+                axios.get(`${API_URL}/users`)
+                    .then(result => setUsers(result.data))
+                    .then(() => alert(result.data.success))
+                    .catch(err => alert('Could not fetch data.'));
+            })
             .catch(err => alert(err));
     };
 
@@ -38,7 +43,7 @@ function List({ setView }) {
                         </tr>
                     </thead>
                     <tbody>
-                        {users.map(user => (
+                        {users.length ? users.map(user => (
                             <tr key={user._id}>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
@@ -51,7 +56,11 @@ function List({ setView }) {
                                     <button className="btn btn-outline-danger" onClick={() => handleDelete(user._id)}>Delete User</button>
                                 </td>
                             </tr>
-                        ))}
+                        )) : (
+                            <tr>
+                                <td colspan="6" className="text-center">There are no registered users.</td>
+                            </tr>
+                        )}
                     </tbody>
                 </table>
             </div>
