@@ -6,18 +6,20 @@ function List({ setView }) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        // const interval = setInterval(() => {
-            axios.get(`${API_URL}/users`)
-                .then(result => setUsers(result.data));
-        // }, 2000);
-
-        // return () => {
-        //     clearInterval(interval);
-        // }
+        axios.get(`${API_URL}/users`)
+            .then(result => setUsers(result.data))
+            .catch(err => alert('Could not fetch data.'));
     }, []);
 
     const handleClick = () => {
         setView('create');
+    };
+
+    const handleDelete = (id) => {
+        axios
+            .delete(`${API_URL}/users/${id}`)
+            .then(result => alert(result.data.success))
+            .catch(err => alert(err));
     };
 
     return (
@@ -46,7 +48,7 @@ function List({ setView }) {
                                     <button className="btn btn-outline-warning">Edit User</button>
                                 </td>
                                 <td>
-                                    <button className="btn btn-outline-danger">Delete User</button>
+                                    <button className="btn btn-outline-danger" onClick={() => handleDelete(user._id)}>Delete User</button>
                                 </td>
                             </tr>
                         ))}
