@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { API_URL } from '../../config'
+import { fetchUsers, deleteUser } from '../../services/user';
 
 function List({ setView, setCurrentUser }) {
     const [users, setUsers] = useState([]);
+    const fetch = () => fetchUsers({
+        success: result => {
+            setUsers(result.data)
+        },
+        error: () => alert('Could not fetch data.')
+    });
 
     useEffect(() => {
-        axios.get(`${API_URL}/users`)
-            .then(result => setUsers(result.data))
-            .catch(err => alert('Could not fetch data.'));
+        fetch();
     }, []);
 
     const handleClick = () => {
@@ -27,15 +30,11 @@ function List({ setView, setCurrentUser }) {
             return;
         }
 
-        axios
-            .delete(`${API_URL}/users/${id}`)
-            .then(result => {
-                axios.get(`${API_URL}/users`)
-                    .then(result => setUsers(result.data))
-                    .then(() => alert(result.data.success))
-                    .catch(err => alert('Could not fetch data.'));
-            })
-            .catch(err => alert(err));
+        deleteUser({
+            id,
+            success: () => fetch(),
+            error: () => alert('Could not fetch data.')
+        });
     };
 
     return (
