@@ -1,9 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form } from './';
 import { editUser } from '../../services/user';
 
 function Edit({ currentUser, setCurrentUser, setView }) {
     const { _id, username, email, dateOfBirth, country } = currentUser;
+
+    useEffect(() => {
+        return () => {
+            setCurrentUser();
+        }
+    }, []);
 
     const initialValues = {
         username,
@@ -22,7 +28,13 @@ function Edit({ currentUser, setCurrentUser, setView }) {
         })
     };
 
-    return <Form initialValues={initialValues} setView={setView} handleSubmit={handleSubmit} />
+    return (
+        <Form
+            initialValues={initialValues}
+            setView={setView}
+            handleSubmit={handleSubmit}
+        />
+    )
 };
 
 export default Edit;

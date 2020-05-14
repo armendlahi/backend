@@ -24,7 +24,7 @@ function Form({ initialValues, setView, handleSubmit }) {
         <div className="row">
             <div className="col-6">
                 <button className="btn btn-outline-success mb-5" onClick={handleClick}>View All</button>
-                <form onSubmit={(event) => handleSubmit(event, form)}>
+                <form onSubmit={event => handleSubmit(event, form)}>
                     <div className="form-group">
                         <label htmlFor="username">Username</label>
                         <input

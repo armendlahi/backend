@@ -30,7 +30,12 @@ function Create({ setView }) {
         })
     };
 
-    return <Form setView={setView} handleSubmit={handleSubmit} />
+    return (
+        <Form
+            setView={setView}
+            handleSubmit={handleSubmit}
+        />
+    )
 };
 
 export default Create;

@@ -23,7 +23,7 @@ function List({ setView, setCurrentUser }) {
         setView('edit');
     };
 
-    const handleDelete = (id) => {
+    const handleDelete = id => {
         const confirm = window.confirm('Are you sure you want to delete this user?');
 
         if (!confirm) {
