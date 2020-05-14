@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../config'
 
-function List({ setView }) {
+function List({ setView, setCurrentUser }) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -13,6 +13,11 @@ function List({ setView }) {
 
     const handleClick = () => {
         setView('create');
+    };
+
+    const handleEdit = (user) => {
+        setCurrentUser(user);
+        setView('edit');
     };
 
     const handleDelete = (id) => {
@@ -56,7 +61,7 @@ function List({ setView }) {
                                 <td>{user.dateOfBirth}</td>
                                 <td>{user.country}</td>
                                 <td>
-                                    <button className="btn btn-outline-warning">Edit User</button>
+                                    <button className="btn btn-outline-warning" onClick={() => handleEdit(user)}>Edit User</button>
                                 </td>
                                 <td>
                                     <button className="btn btn-outline-danger" onClick={() => handleDelete(user._id)}>Delete User</button>
