@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { API_URL } from '../../config'
 
-function List() {
+function List({ setView }) {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
@@ -16,10 +16,14 @@ function List() {
         // }
     }, []);
 
+    const handleClick = () => {
+        setView('create');
+    };
+
     return (
-        <div className="container">
-            <div className="col-md-12">
-                <button className="btn btn-outline-success mb-5">Create New</button>
+        <div className="row">
+            <div className="col-12">
+                <button className="btn btn-outline-success mb-5" onClick={() => handleClick()}>Create New</button>
                 <table className="table table-striped">
                     <thead>
                         <tr>
